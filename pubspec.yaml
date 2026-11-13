@@ -17,7 +17,7 @@ dependencies:
   # Cupertino style icons
   cupertino_icons: ^1.0.8
   get: ^4.6.6
-  google_fonts: ^6.2.1
+  google_fonts: 9.0.0
   http: ^1.2.2
   csv: ^6.0.0
   lottie: ^3.1.2
