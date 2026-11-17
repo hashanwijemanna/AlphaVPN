@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:get/get.dart';
 import '../models/vpn.dart';
 import '../models/vpn_config.dart';
@@ -86,8 +86,8 @@ class HomeController extends GetxController {
   }
 
   String _decodeConfig(String base64) {
-    final data = Base64Decoder().convert(base64);
-    return Utf8Decoder().convert(data);
+    final data = const Base64Decoder().convert(base64);
+    return const Utf8Decoder().convert(data);
   }
 
   Color get getButtonColor => switch (vpnState.value) {

@@ -1,8 +1,8 @@
 import 'package:alpha/controllers/home_controller.dart';
 import 'package:alpha/models/vpn.dart';
 import 'package:alpha/services/vpn_engine.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:get/get.dart';
 
 class VpnCard extends StatelessWidget {

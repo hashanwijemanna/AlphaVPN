@@ -1,6 +1,6 @@
 import 'package:alpha/controllers/location_controller.dart';
 import 'package:alpha/widgets/vpn_card.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -24,7 +24,7 @@ class LocationScreen extends StatelessWidget {
           'VPN Locations',
           style: GoogleFonts.righteous(
             textStyle: TextStyle(
-              color: Colors.black.withOpacity(0.8), // Set title text color to black
+              color: Colors.black.withValues(alpha: 0.8), // Set title text color to black
               letterSpacing: 3,
             ),
           ),
@@ -68,12 +68,12 @@ class LocationScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         LottieBuilder.asset('assets/lottie/loading.json'),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Text(
           'Loading Servers ...',
           style: TextStyle(
             fontSize: 25,
-            color: Colors.white.withOpacity(0.5),
+            color: Colors.white.withValues(alpha: 0.5),
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -89,12 +89,12 @@ class LocationScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         LottieBuilder.asset('assets/lottie/404.json'),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Text(
           'No Servers Found !!',
           style: TextStyle(
             fontSize: 25,
-            color: Colors.white.withOpacity(0.5),
+            color: Colors.white.withValues(alpha: 0.5),
             fontWeight: FontWeight.bold,
           ),
         ),

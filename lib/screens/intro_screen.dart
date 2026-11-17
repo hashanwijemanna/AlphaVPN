@@ -1,6 +1,6 @@
 import 'package:alpha/global_data.dart';
 import 'package:alpha/screens/home_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});
@@ -39,7 +39,7 @@ class _IntroScreenState extends State<IntroScreen> {
                 });
               },
               itemBuilder: (context, index) {
-                return Container(
+                return SizedBox(
                   width: mq.width,
                   height: mq.height,
                   child: Image.asset(

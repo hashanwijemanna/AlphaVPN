@@ -5,8 +5,8 @@ import 'package:alpha/models/vpn_config.dart';
 import 'package:alpha/screens/location_screen.dart';
 import 'package:alpha/widgets/count_down_timer.dart';
 import 'package:alpha/widgets/home_card.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../models/vpn_status.dart';
@@ -88,7 +88,7 @@ class HomeScreen extends StatelessWidget {
                 builder: (context) => AlertDialog(
                   backgroundColor: Colors.black,
                   title: const Text('Application Logs', style: TextStyle(color: Colors.green)),
-                  content: Container(
+                  content: SizedBox(
                     width: double.maxFinite,
                     height: MediaQuery.of(context).size.height * 0.5,
                     child: Obx(() {
@@ -118,7 +118,7 @@ class HomeScreen extends StatelessWidget {
         'AlphaVPN',
         style: GoogleFonts.righteous(
           textStyle: TextStyle(
-            color: Colors.black.withOpacity(0.8),
+            color: Colors.black.withValues(alpha: 0.8),
             letterSpacing: 3,
           ),
         ),
@@ -166,12 +166,12 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.white.withOpacity(.3),
+              color: Colors.white.withValues(alpha: .3),
             ),
             child: Container(
               width: mq.height * .14,
               height: mq.height * .14,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.white,
               ),
@@ -258,7 +258,7 @@ class HomeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           HomeCard(
-            title: '${snapshot.data?.byteIn ?? '0 kbps'}',
+            title: snapshot.data?.byteIn ?? '0 kbps',
             subtitle: 'DOWNLOAD',
             icon: const CircleAvatar(
               backgroundColor: Colors.green,
@@ -267,7 +267,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           HomeCard(
-            title: '${snapshot.data?.byteOut ?? '0 kbps'}',
+            title: snapshot.data?.byteOut ?? '0 kbps',
             subtitle: 'UPLOAD',
             icon: const CircleAvatar(
               backgroundColor: Colors.white,
@@ -289,7 +289,7 @@ class HomeScreen extends StatelessWidget {
           InkWell(
             onTap: () => Get.to(() => LocationScreen()),
             child: Container(
-              color: Colors.black.withOpacity(0.3),
+              color: Colors.black.withValues(alpha: 0.3),
               height: 60,
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: const Row(
@@ -315,7 +315,7 @@ class HomeScreen extends StatelessWidget {
               if (appLogs.length > 200) appLogs.removeLast();
             },
             child: Container(
-              color: Colors.black.withOpacity(0.3),
+              color: Colors.black.withValues(alpha: 0.3),
               height: 60,
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
@@ -343,7 +343,7 @@ class HomeScreen extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-          color: Colors.yellow.shade800.withOpacity(0.9),
+          color: Colors.yellow.shade800.withValues(alpha: 0.9),
           borderRadius: BorderRadius.circular(10),
         ),
         child: const Text(
@@ -368,7 +368,7 @@ class HomeScreen extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(vertical: 4),
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.2),
+                    color: Colors.black.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(

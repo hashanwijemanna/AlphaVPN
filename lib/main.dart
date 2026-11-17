@@ -1,23 +1,28 @@
+
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/route_manager.dart';
-import 'dart:async';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'global_data.dart';
 import 'screens/home_screen.dart';
 import 'screens/intro_screen.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'global_data.dart'; // NEW: Import GlobalData
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Load saved introduction status.
   await GlobalData.loadIntroSeen();
 
-  SystemChrome.setPreferredOrientations([
+  // Lock application orientation to portrait.
+  await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
-  ]).then((_) {
-    runApp(const MyApp());
-  });
+  ]);
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -27,28 +32,37 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
-      theme: ThemeData(
-        appBarTheme: const AppBarTheme(
-          centerTitle: true,
-          elevation: 10,
-        ),
-      ),
+      home: const SplashScreen(),
     );
   }
 }
 
+// --------------------------------------------------
+// SPLASH SCREEN
+// --------------------------------------------------
+
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
-  _SplashScreenState createState() => _SplashScreenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  Timer? _splashTimer;
+
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 5), () async {
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+
+    _splashTimer = Timer(const Duration(seconds: 5), () async {
+      if (!mounted) return;
+
+      await SystemChrome.setEnabledSystemUIMode(
+        SystemUiMode.edgeToEdge,
+      );
+
+      if (!mounted) return;
 
       if (GlobalData.introSeen) {
         Get.off(() => HomeScreen());
@@ -56,6 +70,12 @@ class _SplashScreenState extends State<SplashScreen> {
         Get.off(() => const IntroScreen());
       }
     });
+  }
+
+  @override
+  void dispose() {
+    _splashTimer?.cancel();
+    super.dispose();
   }
 
   @override
@@ -78,15 +98,21 @@ class _SplashScreenState extends State<SplashScreen> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       image: const DecorationImage(
-                        image: AssetImage('assets/images/wolf_face.png'),
+                        image: AssetImage(
+                          'assets/images/wolf_face.png',
+                        ),
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                 ),
               ),
+
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 20.0,
+                  horizontal: 50.0,
+                ),
                 child: Container(
                   width: screenWidth * 0.6,
                   height: 20,
@@ -98,14 +124,19 @@ class _SplashScreenState extends State<SplashScreen> {
                     ),
                   ),
                   child: const ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(8),
+                    ),
                     child: LinearProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        Colors.black,
+                      ),
                       backgroundColor: Colors.white,
                     ),
                   ),
                 ),
               ),
+
               Padding(
                 padding: const EdgeInsets.only(bottom: 20.0),
                 child: Column(
@@ -118,6 +149,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         letterSpacing: 3,
                       ),
                     ),
+
                     Text(
                       '2025 All Rights Reserved.',
                       style: GoogleFonts.righteous(
